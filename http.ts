@@ -1,14 +1,14 @@
-import {
-  Application,
-  send,
-  Router,
-} from "https://deno.land/x/oak@v6.5.0/mod.ts";
+import { Application, Router } from "https://deno.land/x/oak@v6.5.0/mod.ts";
+
+import { parse } from "https://deno.land/std/flags/mod.ts";
 
 import { getQuestions, getRandomQuestion } from "./api/questions.ts";
 
 const app = new Application();
-
 const router = new Router();
+const { args } = Deno;
+const DEFAULT_PORT = 8000;
+const argPort = parse(args).port;
 
 router
   .get("/api/questions/random", async (context) => {
@@ -22,4 +22,4 @@ router
 
 app.use(router.routes());
 
-await app.listen({ port: 8000 });
+await app.listen({ port: argPort ? Number(argPort) : DEFAULT_PORT });
