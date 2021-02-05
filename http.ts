@@ -10,11 +10,7 @@ const router = new Router();
 const { args } = Deno;
 const DEFAULT_PORT = 8000;
 const argPort = parse(args).port;
-app.use(
-  oakCors({
-    origin: "http://localhost:5000",
-  })
-);
+app.use(oakCors());
 router
   .get("/api/questions/random", async (context) => {
     const question = await getRandomQuestion();
