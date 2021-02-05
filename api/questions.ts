@@ -3,7 +3,7 @@ export async function getRandomQuestion() {
   const num = Math.floor(Math.random() * questions.data.length);
   const question = questions.data[num];
   return {
-    question: question,
+    question,
   };
 }
 
